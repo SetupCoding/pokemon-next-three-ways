@@ -1,11 +1,12 @@
 import { Card, Col, Container, FormControl, Row } from "react-bootstrap";
+import { ErrorComponent, Loading } from "../components";
+import { useEffect, useState } from "react";
 
 import Head from "next/head";
 import Link from "next/link";
 import { Pokemon } from "../models/pokemon.model";
 import useDebouncedCallback from "../hooks/useDebounceCallback";
 import { useQuery } from "react-query";
-import { useState } from "react";
 
 const getPokemon = async (_, query): Promise<Pokemon[]> => {
   const res = await fetch(`/api/search?q=${escape(query)}`);
@@ -21,8 +22,16 @@ const getPokemon = async (_, query): Promise<Pokemon[]> => {
 const Home = () => {
   const [query, setQuery] = useState<string>("");
   const [debouncedQuery, setDebouncedQuery] = useState<string>("");
+  const [pokemonCount, setPokemonCount] = useState(0);
+  const { data, error, isFetching } = useQuery(
+    ["q", debouncedQuery],
+    getPokemon
+  );
 
-  const { data } = useQuery(["q", debouncedQuery], getPokemon);
+  useEffect(() => {
+    data &&
+      setPokemonCount((prev) => (data.length > prev ? data.length : prev));
+  }, [data]);
 
   const queryPokemon = useDebouncedCallback(
     (e) => {
@@ -33,6 +42,13 @@ const Home = () => {
     },
     200
   );
+
+  const getNumberWithZeros = (id: number) =>
+    `${Array(
+      pokemonCount ? pokemonCount.toString().length - id.toString().length : 0
+    )
+      .fill("0")
+      .join("")}${id}`;
 
   return (
     <div className="container">
@@ -62,7 +78,9 @@ const Home = () => {
                         style={{ height: 300, objectFit: "contain" }}
                       />
                       <Card.Body>
-                        <Card.Title>{name.english}</Card.Title>
+                        <Card.Title>{`Nr.${getNumberWithZeros(id)} - ${
+                          name.english
+                        }`}</Card.Title>
                         <Card.Subtitle>{type.join(", ")}</Card.Subtitle>
                       </Card.Body>
                     </Card>
@@ -72,6 +90,8 @@ const Home = () => {
             ))}
           </Row>
         )}
+        <Loading isLoading={isFetching} />
+        <ErrorComponent error={error} />
       </Container>
     </div>
   );
