@@ -16,6 +16,6 @@ This is a fork of [Jack Herrington's Pokemon Next Three Ways](https://github.com
  5. **Keep in mind that you will not see benefits of SSR or SSG running in development mode, every page is pre-rendered on each request**
 
 ## Building
-1. Run `yarn install`
+ 1. Run `yarn install`
  2. Run `yarn build`
  3. Run `yarn start`
