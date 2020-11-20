@@ -2,6 +2,7 @@ import { Card, Col, Container, FormControl, Row } from "react-bootstrap";
 
 import Head from "next/head";
 import Link from "next/link";
+import useDebouncedCallback from "../hooks/useDebounceCallback";
 import { useQuery } from "react-query";
 import { useState } from "react";
 
@@ -17,8 +18,20 @@ const getPokemon = async (key, q) => {
 };
 
 const Home = () => {
-  const [query, setQuery] = useState("");
-  const { data } = useQuery(["q", query], getPokemon);
+  const [query, setQuery] = useState<string>("");
+  const [debouncedQuery, setDebouncedQuery] = useState<string>("");
+
+  const { data } = useQuery(["q", debouncedQuery], getPokemon);
+
+  const queryPokemon = useDebouncedCallback(
+    (e) => {
+      setQuery(e.target.value);
+    },
+    (e) => {
+      setDebouncedQuery(e.target.value);
+    },
+    200
+  );
 
   return (
     <div className="container">
@@ -32,7 +45,7 @@ const Home = () => {
           placeholder="Search"
           aria-label="Search"
           value={query}
-          onChange={(evt) => setQuery(evt.target.value)}
+          onChange={queryPokemon}
         />
         {data && (
           <Row>
