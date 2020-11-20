@@ -1,4 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const App = ({ Component, pageProps }) => <Component {...pageProps} />;
+import { AppProps } from "next/dist/next-server/lib/router/router";
+import React from "react";
+
+const App: React.FC<AppProps> = ({ Component, pageProps }) => (
+  <Component {...pageProps} />
+);
 export default App;
