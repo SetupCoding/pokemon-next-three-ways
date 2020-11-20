@@ -57,7 +57,8 @@ const Home = () => {
                     <Card.Img
                       variant="top"
                       src={image}
-                      style={{ maxHeight: 300 }}
+                        alt={`Image of ${name.english}`}
+                        style={{ height: 300, objectFit: "contain" }}
                     />
                     <Card.Body>
                       <Card.Title>{name.english}</Card.Title>
