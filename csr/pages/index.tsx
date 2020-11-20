@@ -2,6 +2,7 @@ import { Card, Col, Container, FormControl, Row } from "react-bootstrap";
 
 import Head from "next/head";
 import Link from "next/link";
+import { Pokemon } from "../models/pokemon.model";
 import useDebouncedCallback from "../hooks/useDebounceCallback";
 import { useQuery } from "react-query";
 import { useState } from "react";
@@ -54,17 +55,17 @@ const Home = () => {
                 <Link href={`/pokemon/${id}`}>
                   <a>
                     <Card style={{ cursor: "pointer" }}>
-                    <Card.Img
-                      variant="top"
-                      src={image}
+                      <Card.Img
+                        variant="top"
+                        src={image}
                         alt={`Image of ${name.english}`}
                         style={{ height: 300, objectFit: "contain" }}
-                    />
-                    <Card.Body>
-                      <Card.Title>{name.english}</Card.Title>
-                      <Card.Subtitle>{type.join(", ")}</Card.Subtitle>
-                    </Card.Body>
-                  </Card>
+                      />
+                      <Card.Body>
+                        <Card.Title>{name.english}</Card.Title>
+                        <Card.Subtitle>{type.join(", ")}</Card.Subtitle>
+                      </Card.Body>
+                    </Card>
                   </a>
                 </Link>
               </Col>
