@@ -1,7 +1,8 @@
+import { NextApiRequest, NextApiResponse } from "next";
+
 import pokemon from "../../pokemon.json";
 
-export default (req, res) => {
-  if (!req.query.name) {
+export default (req: NextApiRequest, res: NextApiResponse) => {
     res.statusCode = 400;
     res.end("Must have a name");
   } else {
