@@ -6,9 +6,7 @@ export default (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.end(
     JSON.stringify(
-      pokemon
-        .filter(({ name: { english } }) => english.match(filter))
-        .slice(0, 10)
+      pokemon.filter(({ name: { english } }) => english.match(filter))
     )
   );
 };
