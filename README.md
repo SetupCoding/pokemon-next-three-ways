@@ -1,5 +1,5 @@
 # 3 x Pokemon with Next.js
-## CSR, SSR and SSG on NextJS
+## CSR, SSR and SSG with Next.js
 
 This is a fork of [Jack Herrington's Pokemon Next Three Ways](https://github.com/jherr/pokemon-next-three-ways)  with addition of TypeScript and updated/cleaned dependencies. It provides 3 example projects for a web application that is
 
