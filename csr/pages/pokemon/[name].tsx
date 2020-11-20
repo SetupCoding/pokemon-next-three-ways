@@ -1,12 +1,12 @@
 import { Col, Container, Row } from "react-bootstrap";
 
 import Head from "next/head";
-import axios from "axios";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 
 const getPokemon = async (key, name) => {
-  const { data } = await axios.get(`/api/pokemon?name=${escape(name)}`);
+  const res = await fetch(`/api/pokemon?name=${escape(name)}`);
+  const data = await res.json();
   return data;
 };
 

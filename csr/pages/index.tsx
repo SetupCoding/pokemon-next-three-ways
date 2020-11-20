@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { Card, Col, Container, FormControl, Row } from "react-bootstrap";
+
 import Head from "next/head";
 import Link from "next/link";
-import { Container, FormControl, Row, Col, Card } from "react-bootstrap";
-import axios from "axios";
 import { useQuery } from "react-query";
+import { useState } from "react";
 
 const getPokemon = async (key, q) => {
-  const { data } = await axios.get(`/api/search?q=${escape(q)}`);
+  const res = await fetch(`/api/search?q=${escape(q)}`);
+  const data = await res.json();
   return data.map((pokemon) => ({
     ...pokemon,
     image: `/pokemon/${pokemon.name.english

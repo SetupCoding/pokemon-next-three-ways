@@ -1,6 +1,6 @@
 import pokemon from "../../pokemon.json";
 
-export default (req, res) => {
+export default (req: NextApiRequest, res: NextApiResponse)  => {
   const filter = req.query.q ? new RegExp(req.query.q, "i") : /.*/;
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
