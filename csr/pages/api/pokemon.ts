@@ -12,7 +12,15 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
     const found = pokemon.find(({ id }) => id === +idToFind);
     if (!found) {
       res.statusCode = 404;
-      res.end(`Pokemon with id ${req.query.id} not found`);
+      res.end(
+        JSON.stringify({
+          error: {
+            status: 404,
+            error: 'Not Found',
+            message: `Pokemon with id ${req.query.id} not found`,
+          },
+        })
+      );
     } else {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
