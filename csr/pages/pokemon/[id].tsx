@@ -1,23 +1,28 @@
 import { Col, Container, Row } from "react-bootstrap";
 
 import Head from "next/head";
+import Link from "next/link";
+import { Pokemon } from "../../models/pokemon.model";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 
-const getPokemon = async (key, name) => {
-  const res = await fetch(`/api/pokemon?name=${escape(name)}`);
-  const data = await res.json();
+const getPokemon = async (_, id): Promise<Pokemon> => {
+  const res = await fetch(`/api/pokemon?id=${escape(id)}`);
+  const data = (await res.json()) as Pokemon;
   return data;
 };
 
 const PokemonDetails = () => {
   const router = useRouter();
-  const { data } = useQuery(["name", router.query.name], getPokemon);
+  const { data } = useQuery(["id", router.query.id], getPokemon);
   return (
     <div>
       <Head>
         <title>{(data && data.name.english) || "Pokemon"}</title>
       </Head>
+      <Link href="/">
+        <a>{"<"}</a>
+      </Link>
       <Container>
         {data && (
           <>
