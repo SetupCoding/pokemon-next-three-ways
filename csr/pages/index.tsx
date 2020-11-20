@@ -51,8 +51,8 @@ const Home = () => {
           <Row>
             {data.map(({ id, name, type, image }) => (
               <Col xs={4} key={id} style={{ padding: 5 }}>
-                <Link href={`/pokemon/${name.english}`}>
-                  <Card>
+                <Link href={`/pokemon/${id}`}>
+                  <a>
                     <Card.Img
                       variant="top"
                       src={image}
@@ -63,6 +63,7 @@ const Home = () => {
                       <Card.Subtitle>{type.join(", ")}</Card.Subtitle>
                     </Card.Body>
                   </Card>
+                  </a>
                 </Link>
               </Col>
             ))}
