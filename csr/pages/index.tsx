@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { Pokemon } from "../models/pokemon.model";
+import { handleErrors } from "../utils/handleErrors";
 import useDebouncedCallback from "../hooks/useDebounceCallback";
 import { useQuery } from "react-query";
 
 const getPokemon = async (_, query): Promise<Pokemon[]> => {
   const res = await fetch(`/api/search?q=${escape(query)}`);
-  const data = (await res.json()) as Pokemon[];
+  const data = await handleErrors(res);
   return data.map((pokemon) => ({
     ...pokemon,
     image: `/pokemon/${pokemon.name.english
@@ -40,7 +41,7 @@ const Home = () => {
     (e) => {
       setDebouncedQuery(e.target.value);
     },
-    200
+    300
   );
 
   const getNumberWithZeros = (id: number) =>
