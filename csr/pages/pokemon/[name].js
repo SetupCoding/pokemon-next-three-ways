@@ -1,15 +1,16 @@
-import { useRouter } from "next/router";
+import { Col, Container, Row } from "react-bootstrap";
+
+import Head from "next/head";
 import axios from "axios";
 import { useQuery } from "react-query";
-import Head from "next/head";
-import { Container, Row, Col } from "react-bootstrap";
+import { useRouter } from "next/router";
 
 const getPokemon = async (key, name) => {
   const { data } = await axios.get(`/api/pokemon?name=${escape(name)}`);
   return data;
 };
 
-export default () => {
+const PokemonDetails = () => {
   const router = useRouter();
   const { data } = useQuery(["name", router.query.name], getPokemon);
   return (
@@ -47,3 +48,5 @@ export default () => {
     </div>
   );
 };
+
+export default PokemonDetails;
