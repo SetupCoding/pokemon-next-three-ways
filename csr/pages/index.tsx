@@ -6,9 +6,9 @@ import useDebouncedCallback from "../hooks/useDebounceCallback";
 import { useQuery } from "react-query";
 import { useState } from "react";
 
-const getPokemon = async (key, q) => {
-  const res = await fetch(`/api/search?q=${escape(q)}`);
-  const data = await res.json();
+const getPokemon = async (_, query): Promise<Pokemon[]> => {
+  const res = await fetch(`/api/search?q=${escape(query)}`);
+  const data = (await res.json()) as Pokemon[];
   return data.map((pokemon) => ({
     ...pokemon,
     image: `/pokemon/${pokemon.name.english
