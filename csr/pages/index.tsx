@@ -53,6 +53,7 @@ const Home = () => {
               <Col xs={4} key={id} style={{ padding: 5 }}>
                 <Link href={`/pokemon/${id}`}>
                   <a>
+                    <Card style={{ cursor: "pointer" }}>
                     <Card.Img
                       variant="top"
                       src={image}
