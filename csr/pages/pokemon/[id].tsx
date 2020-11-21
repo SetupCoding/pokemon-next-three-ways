@@ -1,5 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { ErrorComponent, Loading } from "../../components";
+import { ErrorComponent, Home, Loading } from "../../components";
 
 import Head from "next/head";
 import Link from "next/link";
@@ -25,9 +25,7 @@ const PokemonDetails: React.FC = () => {
       <Head>
         <title>{(data && data.name.english) || "Pokemon"}</title>
       </Head>
-      <Link href="/">
-        <a>{"<"}</a>
-      </Link>
+      <Home />
       <Container>
         {data && (
           <>
