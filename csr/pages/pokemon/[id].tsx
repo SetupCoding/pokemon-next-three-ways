@@ -4,6 +4,7 @@ import { ErrorComponent, Home, Loading } from "../../components";
 import Head from "next/head";
 import Image from "next/image";
 import { Pokemon } from "../../models/pokemon.model";
+import React from "react";
 import c from "../../components/pokemon-card.module.css";
 import { handleErrors } from "../../utils/handleErrors";
 import { useQuery } from "react-query";
