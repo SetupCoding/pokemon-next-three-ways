@@ -3,6 +3,7 @@ import { Card, Col } from "react-bootstrap";
 import Link from "next/link";
 import { Pokemon } from "../models/pokemon.model";
 import React from "react";
+import c from "./pokemon-card.module.css";
 
 type Props = Pokemon & {
   pokemonCount: number;
@@ -22,15 +23,15 @@ export const PokemonCard: React.FC<Props> = ({
       .fill("0")
       .join("")}${id}`;
   return (
-    <Col xs={4} key={id} style={{ padding: 5 }}>
+    <Col xs={4} key={id} className={c.cardWrapper}>
       <Link href={`/pokemon/${id}`}>
         <a>
-          <Card style={{ cursor: "pointer" }}>
+          <Card className={c.card}>
             <Card.Img
               variant="top"
               src={image}
               alt={`Image of ${name.english}`}
-              style={{ height: 300, objectFit: "contain" }}
+              className={c.cardImage}
             />
             <Card.Body>
               <Card.Title>{`Nr.${getNumberWithZeros(id)} - ${

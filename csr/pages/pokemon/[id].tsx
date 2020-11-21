@@ -4,6 +4,7 @@ import { ErrorComponent, Home, Loading } from "../../components";
 import Head from "next/head";
 import Image from "next/image";
 import { Pokemon } from "../../models/pokemon.model";
+import c from "../../components/pokemon-card.module.css";
 import { handleErrors } from "../../utils/handleErrors";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
@@ -36,7 +37,7 @@ const PokemonDetails: React.FC = () => {
           <>
             <h1>{data.name.english}</h1>
             <Row>
-              <Col xs={4}>
+              <Col xs={4} className={c.detailImage}>
                 <Image
                   layout="fill"
                   src={`/pokemon/${data.name.english

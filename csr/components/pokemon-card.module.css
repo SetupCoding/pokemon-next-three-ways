@@ -1,0 +1,26 @@
+.cardWrapper {
+    padding: 5px;
+}
+
+.card {
+    cursor: pointer;
+}
+
+.cardImage{
+    height: 300px;
+    object-fit: contain;
+}
+
+.detailImage {
+    height: 300px;
+}
+
+.cardWrapper> a{
+    color: black;
+    text-decoration: none;
+}
+
+.cardWrapper > a:hover {
+    color: black;
+    text-decoration: none;
+}
