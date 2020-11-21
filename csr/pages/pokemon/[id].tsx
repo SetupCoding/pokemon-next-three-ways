@@ -17,7 +17,8 @@ const PokemonDetails: React.FC = () => {
   const router = useRouter();
   const { data, error, isFetching } = useQuery(
     ["id", router.query.id],
-    getPokemon
+    getPokemon,
+    { retry: false, enabled: !!router.query.id }
   );
   return (
     <div>
