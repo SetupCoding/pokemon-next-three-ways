@@ -2,6 +2,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { ErrorComponent, Home, Loading } from "../../components";
 
 import Head from "next/head";
+import Image from "next/image";
 import { Pokemon } from "../../models/pokemon.model";
 import { handleErrors } from "../../utils/handleErrors";
 import { useQuery } from "react-query";
@@ -36,14 +37,13 @@ const PokemonDetails: React.FC = () => {
             <h1>{data.name.english}</h1>
             <Row>
               <Col xs={4}>
-                <img
+                <Image
+                  layout="fill"
                   src={`/pokemon/${data.name.english
                     .toLowerCase()
                     .replace(" ", "-")}.jpg`}
                   alt={`Image of ${data.name.english}`}
-                  style={{
-                    width: "100%",
-                  }}
+                  objectFit="contain"
                 />
               </Col>
               <Col xs={8}>
