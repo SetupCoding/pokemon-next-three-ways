@@ -1,9 +1,8 @@
-import { Card, Col, Container, FormControl, Row } from "react-bootstrap";
-import { ErrorComponent, Loading } from "../components";
+import { Container, FormControl, Row } from "react-bootstrap";
+import { ErrorComponent, Loading, PokemonCard } from "../components";
 import { useEffect, useState } from "react";
 
 import Head from "next/head";
-import Link from "next/link";
 import { Pokemon } from "../models/pokemon.model";
 import { handleErrors } from "../utils/handleErrors";
 import useDebouncedCallback from "../hooks/useDebounceCallback";
@@ -44,13 +43,6 @@ const Home = () => {
     300
   );
 
-  const getNumberWithZeros = (id: number) =>
-    `${Array(
-      pokemonCount ? pokemonCount.toString().length - id.toString().length : 0
-    )
-      .fill("0")
-      .join("")}${id}`;
-
   return (
     <div className="container">
       <Head>
@@ -67,27 +59,12 @@ const Home = () => {
         />
         {data && (
           <Row>
-            {data.map(({ id, name, type, image }) => (
-              <Col xs={4} key={id} style={{ padding: 5 }}>
-                <Link href={`/pokemon/${id}`}>
-                  <a>
-                    <Card style={{ cursor: "pointer" }}>
-                      <Card.Img
-                        variant="top"
-                        src={image}
-                        alt={`Image of ${name.english}`}
-                        style={{ height: 300, objectFit: "contain" }}
-                      />
-                      <Card.Body>
-                        <Card.Title>{`Nr.${getNumberWithZeros(id)} - ${
-                          name.english
-                        }`}</Card.Title>
-                        <Card.Subtitle>{type.join(", ")}</Card.Subtitle>
-                      </Card.Body>
-                    </Card>
-                  </a>
-                </Link>
-              </Col>
+            {data.map((pokemon) => (
+              <PokemonCard
+                key={pokemon.id}
+                {...pokemon}
+                pokemonCount={pokemonCount}
+              />
             ))}
           </Row>
         )}
