@@ -5,6 +5,7 @@
       "jsx": "react",
       "sourceMap": false,
       "experimentalDecorators": true,
+      "esModuleInterop": true,
       "noImplicitUseStrict": true,
       "removeComments": true,
       "moduleResolution": "node",
