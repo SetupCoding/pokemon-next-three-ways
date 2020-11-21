@@ -2,7 +2,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import { ErrorComponent, Home, Loading } from "../../components";
 
 import Head from "next/head";
-import Link from "next/link";
 import { Pokemon } from "../../models/pokemon.model";
 import { handleErrors } from "../../utils/handleErrors";
 import { useQuery } from "react-query";
@@ -24,6 +23,11 @@ const PokemonDetails: React.FC = () => {
     <div>
       <Head>
         <title>{(data && data.name.english) || "Pokemon"}</title>
+        <meta
+          name="description"
+          content={`Base stats of ${data?.name?.english}`}
+          key="description"
+        />
       </Head>
       <Home />
       <Container>

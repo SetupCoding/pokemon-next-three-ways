@@ -48,6 +48,13 @@ const Home = () => {
       <Head>
         <title>Pokemon!</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta property="og:title" content="Pokemon" key="title" />
+        <meta
+          name="description"
+          content="A List of all Pokemon"
+          key="description"
+        />
       </Head>
 
       <Container>
