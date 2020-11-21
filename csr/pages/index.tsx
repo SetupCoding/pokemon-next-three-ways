@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import Head from "next/head";
 import { Pokemon } from "../models/pokemon.model";
+import c from "../styles/index.module.css";
 import { handleErrors } from "../utils/handleErrors";
 import useDebouncedCallback from "../hooks/useDebounceCallback";
 import { useQuery } from "react-query";
@@ -63,6 +64,7 @@ const Home = () => {
           aria-label="Search"
           value={query}
           onChange={queryPokemon}
+          className={c.searchBar}
         />
         {data && (
           <Row>
