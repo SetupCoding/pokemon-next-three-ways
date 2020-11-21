@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Home /> renders the Home component correctly 1`] = `
+<a
+  href="/"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+>
+  &lt; Home
+</a>
+`;
