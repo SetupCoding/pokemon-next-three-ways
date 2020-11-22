@@ -1,20 +1,23 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { GetStaticPaths, GetStaticProps } from "next";
 
+import { API_URL } from "../../constants/const";
 import Head from "next/head";
 import { Home } from "../../components";
 import Image from "next/image";
 import { Pokemon } from "../../models/pokemon.model";
 import React from "react";
 import c from "../../components/pokemon-card.module.css";
-import pokemon from "../../pokemon.json";
+import { handleErrors } from "../../utils/handleErrors";
 
 /**
- * Runing at build time
+ * Dynamic routes pre-rendered at build time
  * */
 export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch(`${API_URL}/search`);
+  const data = await handleErrors(res);
   return {
-    paths: pokemon.map(({ id }) => ({
+    paths: data.map(({ id }) => ({
       params: {
         id: id.toString(),
       },
@@ -23,10 +26,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+/**
+ * Fetch data at build time
+ * */
 export const getStaticProps: GetStaticProps = async (context) => {
+  //re-using the fetched data from getStaticPaths is only possible with filesystem cache right now https://github.com/vercel/next.js/discussions/11272
+  const res = await fetch(`${API_URL}/pokemon?id=${context.params.id}`);
+  const data = await handleErrors(res);
   return {
     props: {
-      data: pokemon.find(({ id }) => id === +context.params.id),
+      data: data,
     },
   };
 };
