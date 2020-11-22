@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PokemonDetails /> renders the PokemonDetails component correctly 1`] = `
+<div>
+  <a
+    href="/"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+  >
+    &lt; Home
+  </a>
+  <div
+    className="container"
+  >
+    <h1>
+      Bulbasaur
+    </h1>
+    <div
+      className="row"
+    >
+      <div
+        className="detailImage col-4"
+      >
+        <img
+          alt="Image of Bulbasaur"
+          src="/pokemon/bulbasaur.jpg"
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-8"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col-2"
+          >
+            HP
+          </div>
+          <div
+            className="col-10"
+          >
+            45
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="col-2"
+          >
+            Attack
+          </div>
+          <div
+            className="col-10"
+          >
+            49
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="col-2"
+          >
+            Defense
+          </div>
+          <div
+            className="col-10"
+          >
+            49
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="col-2"
+          >
+            Sp.Attack
+          </div>
+          <div
+            className="col-10"
+          >
+            65
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="col-2"
+          >
+            Sp.Defense
+          </div>
+          <div
+            className="col-10"
+          >
+            65
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="col-2"
+          >
+            Speed
+          </div>
+          <div
+            className="col-10"
+          >
+            45
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
