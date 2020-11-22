@@ -14,7 +14,7 @@ import { handleErrors } from "../../utils/handleErrors";
  * Dynamic routes pre-rendered at build time
  * */
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`${API_URL}/search`);
+  const res = await fetch(`${API_URL}/search?all=true`);
   const data = await handleErrors(res);
   return {
     paths: data.map(({ id }) => ({

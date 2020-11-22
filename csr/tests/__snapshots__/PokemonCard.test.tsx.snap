@@ -23,7 +23,7 @@ exports[`<PokemonCard /> renders the PokemonCard component correctly 1`] = `
         <div
           className="card-title h5"
         >
-          Nr.100 - Voltorb
+          #100 - Voltorb
         </div>
         <div
           className="card-subtitle h6"

@@ -13,8 +13,7 @@ describe("<PokemonCard />", () => {
       french: "Voltorbe",
     },
     type: ["Electric"] as PokemonType[],
-    image: "/pokemon/voltorb.png",
-    pokemonCount: 889,
+    image: `/pokemon/voltorb.png`,
     base: {
       HP: 40,
       Attack: 30,

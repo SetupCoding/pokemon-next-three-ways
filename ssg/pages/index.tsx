@@ -1,5 +1,5 @@
 import { Container, FormControl, Row } from "react-bootstrap";
-import { ErrorComponent, Loading, PokemonCard } from "../components";
+import { ErrorComponent, LoadMore, Loading, PokemonCard } from "../components";
 import { enhanceDataWithImages, handleErrors } from "../utils";
 import { useEffect, useState } from "react";
 
@@ -15,7 +15,7 @@ import { useQuery } from "react-query";
  * Fetches at runtime
  * */
 const getPokemon = async (_?: any, query?: string): Promise<Pokemon[]> => {
-  const res = await fetch(`/api/search?q=${escape(query)}`);
+  const res = await fetch(`/api/search?${query}`);
   const data = await handleErrors(res);
   return enhanceDataWithImages(data);
 };
@@ -23,11 +23,11 @@ const getPokemon = async (_?: any, query?: string): Promise<Pokemon[]> => {
 const Home = ({ data }) => {
   const [query, setQuery] = useState<string>("");
   const [debouncedQuery, setDebouncedQuery] = useState<string>("");
-  const [pokemonCount, setPokemonCount] = useState(0);
+  const [page, setPage] = useState(1);
   const { data: queryData, error, isFetching } = useQuery(
-    ["q", debouncedQuery],
+    ["q", debouncedQuery ? `q=${escape(debouncedQuery)}` : `page=${page}`],
     getPokemon,
-    { enabled: !!debouncedQuery }
+    { enabled: !!debouncedQuery || page !== 1 }
   );
   const [pokemonData, setPokemonData] = useState<Pokemon[]>(data);
 
@@ -38,11 +38,6 @@ const Home = ({ data }) => {
   useEffect(() => {
     !debouncedQuery && setPokemonData(data);
   }, [debouncedQuery]);
-
-  useEffect(() => {
-    data &&
-      setPokemonCount((prev) => (data.length > prev ? data.length : prev));
-  }, [data]);
 
   const queryPokemon = useDebouncedCallback(
     (e) => {
@@ -79,16 +74,17 @@ const Home = ({ data }) => {
         {(data || pokemonData) && (
           <Row>
             {pokemonData.map((pokemon) => (
-              <PokemonCard
-                key={pokemon.id}
-                {...pokemon}
-                pokemonCount={pokemonCount}
-              />
+              <PokemonCard key={pokemon.id} {...pokemon} />
             ))}
           </Row>
         )}
         <Loading isLoading={isFetching} />
         <ErrorComponent error={error} />
+        <Row className="justify-content-md-center">
+          {!error && !isFetching && !debouncedQuery && (
+            <LoadMore setPage={setPage} />
+          )}
+        </Row>
       </Container>
     </div>
   );
