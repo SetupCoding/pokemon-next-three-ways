@@ -4,9 +4,9 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { API_URL } from "../../constants/const";
 import Head from "next/head";
 import { Home } from "../../components";
-import Image from "next/image";
 import { Pokemon } from "../../models/pokemon.model";
 import React from "react";
+import { addImage } from "../../utils/enhanceDataWithImages";
 import c from "../../components/pokemon-card.module.css";
 import { handleErrors } from "../../utils/handleErrors";
 
@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const data = await handleErrors(res);
   return {
     props: {
-      data: data,
+      data: addImage(data, true),
     },
   };
 };
@@ -79,13 +79,12 @@ const PokemonDetails: React.FC<Props> = ({ data }) => {
             <h1>{data.name.english}</h1>
             <Row>
               <Col xs={4} className={c.detailImage}>
-                <Image
-                  layout="fill"
-                  src={`/pokemon/${data.name.english
-                    .toLowerCase()
-                    .replace(" ", "-")}.jpg`}
+                <img
+                  src={data.image}
                   alt={`Image of ${data.name.english}`}
-                  objectFit="contain"
+                  style={{
+                    width: "100%",
+                  }}
                 />
               </Col>
               <Col xs={8}>
