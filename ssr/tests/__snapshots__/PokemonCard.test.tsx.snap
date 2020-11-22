@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PokemonCard /> renders the PokemonCard component correctly 1`] = `
+<div
+  className="cardWrapper col-4"
+>
+  <a
+    href="/pokemon/100"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+  >
+    <div
+      className="card card"
+    >
+      <img
+        alt="Image of Voltorb"
+        className="card-img-top cardImage"
+        src="/pokemon/voltorb.png"
+      />
+      <div
+        className="card-body"
+      >
+        <div
+          className="card-title h5"
+        >
+          Nr.100 - Voltorb
+        </div>
+        <div
+          className="card-subtitle h6"
+        >
+          Electric
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+`;
