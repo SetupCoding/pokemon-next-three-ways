@@ -60,8 +60,8 @@ const Home = () => {
 
       <Container>
         <FormControl
-          placeholder="Search"
-          aria-label="Search"
+          placeholder="Search Pokémon by name"
+          aria-label="Search Pokémon by name"
           value={query}
           onChange={queryPokemon}
           className={c.searchBar}

@@ -1,30 +1,48 @@
 import { Col, Container, Row } from "react-bootstrap";
+import { GetStaticPaths, GetStaticProps } from "next";
 
-import { API_URL } from "../../constants/const";
-import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { Home } from "../../components";
-import { HttpError } from "../../models/http-error.model";
+import Image from "next/image";
 import { Pokemon } from "../../models/pokemon.model";
 import React from "react";
 import c from "../../components/pokemon-card.module.css";
+import pokemon from "../../pokemon.json";
 
 /**
- * getPokemon is gone
- * Error handling is done in _app.tsx
+ * Runing at build time
  * */
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const res = await fetch(`${API_URL}/pokemon?id=${context.params.id}`);
-  const errorCode = res.ok ? false : (res as HttpError).status;
-  const data = await res.json();
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: pokemon.map(({ id }) => ({
+      params: {
+        id: id.toString(),
+      },
+    })),
+    fallback: false,
+  };
+};
 
+export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
-      data: data,
-      error: errorCode ? data : null,
+      data: pokemon.find(({ id }) => id === +context.params.id),
     },
   };
 };
+
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const res = await fetch(`${API_URL}/pokemon?id=${context.params.id}`);
+//   const errorCode = res.ok ? false : (res as HttpError).status;
+//   const data = await res.json();
+
+//   return {
+//     props: {
+//       data: data,
+//       error: errorCode ? data : null,
+//     },
+//   };
+// };
 type Props = {
   data: Pokemon;
 };
@@ -52,23 +70,13 @@ const PokemonDetails: React.FC<Props> = ({ data }) => {
             <h1>{data.name.english}</h1>
             <Row>
               <Col xs={4} className={c.detailImage}>
-                {/* next/Image currently not loading static assets https://github.com/vercel/next.js/issues/18237 */}
-                {/* <Image
+                <Image
                   layout="fill"
                   src={`/pokemon/${data.name.english
                     .toLowerCase()
                     .replace(" ", "-")}.jpg`}
                   alt={`Image of ${data.name.english}`}
                   objectFit="contain"
-                /> */}
-                <img
-                  src={`/pokemon/${data.name.english
-                    .toLowerCase()
-                    .replace(" ", "-")}.jpg`}
-                  alt={`Image of ${data.name.english}`}
-                  style={{
-                    width: "100%",
-                  }}
                 />
               </Col>
               <Col xs={8}>
