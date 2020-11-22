@@ -1,33 +1,43 @@
 import { Container, FormControl, Row } from "react-bootstrap";
 import { ErrorComponent, Loading, PokemonCard } from "../components";
+import { enhanceDataWithImages, handleErrors } from "../utils";
 import { useEffect, useState } from "react";
 
+import { API_URL } from "../constants/const";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import { Pokemon } from "../models/pokemon.model";
 import c from "../styles/index.module.css";
-import { handleErrors } from "../utils/handleErrors";
 import useDebouncedCallback from "../hooks/useDebounceCallback";
 import { useQuery } from "react-query";
 
-const getPokemon = async (_, query): Promise<Pokemon[]> => {
+/**
+ * Fetches at runtime
+ * */
+const getPokemon = async (_?: any, query?: string): Promise<Pokemon[]> => {
   const res = await fetch(`/api/search?q=${escape(query)}`);
   const data = await handleErrors(res);
-  return data.map((pokemon) => ({
-    ...pokemon,
-    image: `/pokemon/${pokemon.name.english
-      .toLowerCase()
-      .replace(" ", "-")}.jpg`,
-  }));
+  return enhanceDataWithImages(data);
 };
 
-const Home = () => {
+const Home = ({ data }) => {
   const [query, setQuery] = useState<string>("");
   const [debouncedQuery, setDebouncedQuery] = useState<string>("");
   const [pokemonCount, setPokemonCount] = useState(0);
-  const { data, error, isFetching } = useQuery(
+  const { data: queryData, error, isFetching } = useQuery(
     ["q", debouncedQuery],
-    getPokemon
+    getPokemon,
+    { enabled: !!debouncedQuery }
   );
+  const [pokemonData, setPokemonData] = useState<Pokemon[]>(data);
+
+  useEffect(() => {
+    queryData && setPokemonData(queryData);
+  }, [queryData]);
+
+  useEffect(() => {
+    !debouncedQuery && setPokemonData(data);
+  }, [debouncedQuery]);
 
   useEffect(() => {
     data &&
@@ -66,9 +76,9 @@ const Home = () => {
           onChange={queryPokemon}
           className={c.searchBar}
         />
-        {data && (
+        {(data || pokemonData) && (
           <Row>
-            {data.map((pokemon) => (
+            {pokemonData.map((pokemon) => (
               <PokemonCard
                 key={pokemon.id}
                 {...pokemon}
@@ -82,6 +92,19 @@ const Home = () => {
       </Container>
     </div>
   );
+};
+
+/**
+ * Fetches at build time
+ * */
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await fetch(`${API_URL}/search`);
+  const data = await handleErrors(res);
+  return {
+    props: {
+      data: enhanceDataWithImages(data, true),
+    },
+  };
 };
 
 export default Home;
