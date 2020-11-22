@@ -32,12 +32,14 @@ const Home = ({ data }) => {
   const [pokemonData, setPokemonData] = useState<Pokemon[]>(data);
 
   useEffect(() => {
-    queryData && setPokemonData(queryData);
-  }, [queryData]);
+    if (!debouncedQuery && queryData) {
+      setPokemonData(queryData);
+    }
+  }, [queryData, debouncedQuery]);
 
   useEffect(() => {
-    !debouncedQuery && setPokemonData(data);
-  }, [debouncedQuery]);
+    queryData && setPokemonData(queryData);
+  }, [queryData]);
 
   const queryPokemon = useDebouncedCallback(
     (e) => {
