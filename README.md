@@ -15,6 +15,9 @@ This is a fork of [Jack Herrington's Pokemon Next Three Ways](https://github.com
  4. Access [http://localhost:3000/](http://localhost:3000/)
  5. **Keep in mind that you will not see benefits of SSR or SSG running in development mode, every page is pre-rendered on each request**
 
+## Testing
+Run `yarn test` for jest snapshot tests.
+
 ## Building
  1. Run `yarn install`
  2. Run `yarn build`
