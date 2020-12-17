@@ -1,6 +1,5 @@
 import { Container, Row } from "react-bootstrap";
 
-import Image from "next/image";
 import Link from "next/link";
 
 export const Custom404: React.FC = () => (
@@ -8,21 +7,23 @@ export const Custom404: React.FC = () => (
     <Row className="justify-content-md-center">
       <h1>404 - Page Not Found</h1>
     </Row>
-    <Link href="/">
-      <a>
-        <Row className="justify-content-md-center">
+    <Row className="justify-content-md-center">
+      <Link href="/">
+        <a>
           <h1>Missingno will lead you back home</h1>
-        </Row>
-        <Row className="justify-content-md-center">
-          <Image
-            src={"/404Pokemon.png"}
-            width={201}
-            height={225}
-            alt="404 Pokemon"
-          />
-        </Row>
-      </a>
-    </Link>
+        </a>
+      </Link>
+    </Row>
+    <Row className="justify-content-md-center">
+      <img
+        src={`/404Pokemon.png`}
+        alt="404 Pokemon"
+        style={{
+          width: "201px",
+          height: "225px",
+        }}
+      />
+    </Row>
   </Container>
 );
 
