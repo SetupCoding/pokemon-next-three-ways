@@ -1,14 +1,13 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { addImage, handleErrors } from "../../utils";
 
 import { API_URL } from "../../constants/const";
 import Head from "next/head";
 import { Home } from "../../components";
 import { Pokemon } from "../../models/pokemon.model";
 import React from "react";
-import { addImage } from "../../utils/enhanceDataWithImages";
 import c from "../../components/pokemon-card.module.css";
-import { handleErrors } from "../../utils/handleErrors";
 
 /**
  * Dynamic routes pre-rendered at build time

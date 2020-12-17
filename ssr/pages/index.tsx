@@ -1,5 +1,6 @@
 import { Container, FormControl, Row } from "react-bootstrap";
 import { ErrorComponent, LoadMore, Loading, PokemonCard } from "../components";
+import { enhanceDataWithImages, handleErrors } from "../utils";
 import { useEffect, useState } from "react";
 
 import { API_URL } from "../constants/const";
@@ -8,8 +9,6 @@ import Head from "next/head";
 import { HttpError } from "../models/http-error.model";
 import { Pokemon } from "../models/pokemon.model";
 import c from "../styles/index.module.css";
-import { enhanceDataWithImages } from "../utils/enhanceDataWithImages";
-import { handleErrors } from "../utils/handleErrors";
 import useDebouncedCallback from "../hooks/useDebounceCallback";
 import { useQuery } from "react-query";
 

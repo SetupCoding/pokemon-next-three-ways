@@ -1,10 +1,10 @@
 import { Container, FormControl, Row } from "react-bootstrap";
 import { ErrorComponent, LoadMore, Loading, PokemonCard } from "../components";
+import { enhanceDataWithImages, handleErrors } from "../utils";
 
 import Head from "next/head";
 import { Pokemon } from "../models/pokemon.model";
 import c from "../styles/index.module.css";
-import { handleErrors } from "../utils/handleErrors";
 import useDebouncedCallback from "../hooks/useDebounceCallback";
 import { useQuery } from "react-query";
 import { useState } from "react";
@@ -12,12 +12,7 @@ import { useState } from "react";
 const getPokemon = async (_, query): Promise<Pokemon[]> => {
   const res = await fetch(`/api/search?${query}`);
   const data = await handleErrors(res);
-  return data.map((pokemon) => ({
-    ...pokemon,
-    image: `/pokemon/${pokemon.name.english
-      .toLowerCase()
-      .replace(" ", "-")}.jpg`,
-  }));
+  return enhanceDataWithImages(data);
 };
 
 const Home = () => {

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Pokemon } from "../../models/pokemon.model";
 import React from "react";
 import c from "../../components/pokemon-card.module.css";
-import { handleErrors } from "../../utils/handleErrors";
+import { handleErrors } from "../../utils";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 
