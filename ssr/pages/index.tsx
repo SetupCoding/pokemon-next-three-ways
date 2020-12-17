@@ -1,38 +1,63 @@
 import { Container, FormControl, Row } from "react-bootstrap";
 import { ErrorComponent, LoadMore, Loading, PokemonCard } from "../components";
+import { useEffect, useState } from "react";
 
+import { API_URL } from "../constants/const";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
+import { HttpError } from "../models/http-error.model";
 import { Pokemon } from "../models/pokemon.model";
 import c from "../styles/index.module.css";
+import { enhanceDataWithImages } from "../utils/enhanceDataWithImages";
 import { handleErrors } from "../utils/handleErrors";
 import useDebouncedCallback from "../hooks/useDebounceCallback";
 import { useQuery } from "react-query";
-import { useState } from "react";
 
 /**
  * Fetches at runtime
  * */
-const getPokemon = async (_, query): Promise<Pokemon[]> => {
+const getPokemon = async (_?: any, query?: string): Promise<Pokemon[]> => {
   const res = await fetch(`/api/search?${query}`);
   const data = await handleErrors(res);
-  return data.map((pokemon) => ({
-    ...pokemon,
-    image: `/pokemon/${pokemon.name.english
-      .toLowerCase()
-      .replace(" ", "-")}.jpg`,
-  }));
+  return enhanceDataWithImages(data);
 };
 
-const Home = () => {
+/**
+ * Fetches on server at runtime
+ * */
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await fetch(`${API_URL}/search`);
+  const errorCode = res.ok ? false : (res as HttpError).status;
+  const data = await res.json();
+  return {
+    props: {
+      data: enhanceDataWithImages(data, true),
+      error: errorCode ? data : null,
+    },
+  };
+};
+
+const Home = ({ data }) => {
   const [query, setQuery] = useState<string>("");
   const [debouncedQuery, setDebouncedQuery] = useState<string>("");
   const [page, setPage] = useState(1);
 
-  const { data, error, isFetching } = useQuery(
+  const { data: queryData, error, isFetching } = useQuery(
     ["q", debouncedQuery ? `q=${escape(debouncedQuery)}` : `page=${page}`],
     getPokemon,
     { enabled: !!debouncedQuery || page !== 1 }
   );
+  const [pokemonData, setPokemonData] = useState<Pokemon[]>(data);
+
+  useEffect(() => {
+    if (!debouncedQuery && queryData) {
+      setPokemonData(queryData);
+    }
+  }, [queryData, debouncedQuery]);
+
+  useEffect(() => {
+    queryData && setPokemonData(queryData);
+  }, [queryData]);
 
   const queryPokemon = useDebouncedCallback(
     (e) => {
@@ -66,9 +91,9 @@ const Home = () => {
           onChange={queryPokemon}
           className={c.searchBar}
         />
-        {data && (
+        {pokemonData && (
           <Row>
-            {data.map((pokemon) => (
+            {pokemonData.map((pokemon) => (
               <PokemonCard key={pokemon.id} {...pokemon} />
             ))}
           </Row>

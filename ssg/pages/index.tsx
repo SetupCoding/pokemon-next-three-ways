@@ -20,6 +20,19 @@ const getPokemon = async (_?: any, query?: string): Promise<Pokemon[]> => {
   return enhanceDataWithImages(data);
 };
 
+/**
+ * Fetches at build time
+ * */
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await fetch(`${API_URL}/search`);
+  const data = await handleErrors(res);
+  return {
+    props: {
+      data: enhanceDataWithImages(data, true),
+    },
+  };
+};
+
 const Home = ({ data }) => {
   const [query, setQuery] = useState<string>("");
   const [debouncedQuery, setDebouncedQuery] = useState<string>("");
@@ -73,7 +86,7 @@ const Home = ({ data }) => {
           onChange={queryPokemon}
           className={c.searchBar}
         />
-        {(data || pokemonData) && (
+        {pokemonData && (
           <Row>
             {pokemonData.map((pokemon) => (
               <PokemonCard key={pokemon.id} {...pokemon} />
@@ -90,19 +103,6 @@ const Home = ({ data }) => {
       </Container>
     </div>
   );
-};
-
-/**
- * Fetches at build time
- * */
-export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch(`${API_URL}/search`);
-  const data = await handleErrors(res);
-  return {
-    props: {
-      data: enhanceDataWithImages(data, true),
-    },
-  };
 };
 
 export default Home;
