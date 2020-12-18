@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   };
 };
 
-const Home = ({ data }) => {
+const PokemonList = ({ data }) => {
   const [query, setQuery] = useState<string>("");
   const [debouncedQuery, setDebouncedQuery] = useState<string>("");
   const [page, setPage] = useState(1);
@@ -109,4 +109,4 @@ const Home = ({ data }) => {
   );
 };
 
-export default Home;
+export default PokemonList;

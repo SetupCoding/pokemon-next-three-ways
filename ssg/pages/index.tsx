@@ -1,7 +1,7 @@
 import { Container, FormControl, Row } from "react-bootstrap";
 import { ErrorComponent, LoadMore, Loading, PokemonCard } from "../components";
+import React, { useEffect, useState } from "react";
 import { enhanceDataWithImages, handleErrors } from "../utils";
-import { useEffect, useState } from "react";
 
 import { API_URL } from "../constants/const";
 import { GetStaticProps } from "next";
@@ -33,7 +33,11 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Home = ({ data }) => {
+type Props = {
+  data: Pokemon[];
+};
+
+const PokemonList: React.FC<Props> = ({ data }) => {
   const [query, setQuery] = useState<string>("");
   const [debouncedQuery, setDebouncedQuery] = useState<string>("");
   const [page, setPage] = useState(1);
@@ -105,4 +109,4 @@ const Home = ({ data }) => {
   );
 };
 
-export default Home;
+export default PokemonList;

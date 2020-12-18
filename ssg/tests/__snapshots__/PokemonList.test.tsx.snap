@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PokemonList /> renders the PokemonList component 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="container"
+  >
+    <input
+      aria-label="Search Pokémon by name"
+      className="searchBar form-control"
+      onChange={[Function]}
+      placeholder="Search Pokémon by name"
+      value=""
+    />
+    <div
+      className="row"
+    >
+      <div
+        className="cardWrapper col-4"
+      >
+        <a
+          href="/pokemon/1"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          <div
+            className="card card"
+          >
+            <img
+              alt="Image of Bulbasaur"
+              className="card-img-top cardImage"
+              src="/pokemon/bulbasaur.png"
+            />
+            <div
+              className="card-body"
+            >
+              <div
+                className="card-title h5"
+              >
+                #1 - Bulbasaur
+              </div>
+              <div
+                className="card-subtitle h6"
+              >
+                Grass, Poison
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div
+        className="cardWrapper col-4"
+      >
+        <a
+          href="/pokemon/2"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          <div
+            className="card card"
+          >
+            <img
+              alt="Image of Ivysaur"
+              className="card-img-top cardImage"
+              src="/pokemon/ivysaur.png"
+            />
+            <div
+              className="card-body"
+            >
+              <div
+                className="card-title h5"
+              >
+                #2 - Ivysaur
+              </div>
+              <div
+                className="card-subtitle h6"
+              >
+                Grass, Poison
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div
+        className="cardWrapper col-4"
+      >
+        <a
+          href="/pokemon/3"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          <div
+            className="card card"
+          >
+            <img
+              alt="Image of Venusaur"
+              className="card-img-top cardImage"
+              src="/pokemon/venusaur.png"
+            />
+            <div
+              className="card-body"
+            >
+              <div
+                className="card-title h5"
+              >
+                #3 - Venusaur
+              </div>
+              <div
+                className="card-subtitle h6"
+              >
+                Grass, Poison
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div
+      className="justify-content-md-center row"
+    >
+      <button
+        onClick={[Function]}
+      >
+        Load more
+      </button>
+    </div>
+  </div>
+</div>
+`;

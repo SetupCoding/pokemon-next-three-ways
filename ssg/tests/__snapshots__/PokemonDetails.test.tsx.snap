@@ -81,7 +81,7 @@ exports[`<PokemonDetails /> renders the PokemonDetails component correctly 1`] =
           <div
             className="col-2"
           >
-            Sp.Attack
+            Sp. Attack
           </div>
           <div
             className="col-10"
@@ -95,7 +95,7 @@ exports[`<PokemonDetails /> renders the PokemonDetails component correctly 1`] =
           <div
             className="col-2"
           >
-            Sp.Defense
+            Sp. Defense
           </div>
           <div
             className="col-10"

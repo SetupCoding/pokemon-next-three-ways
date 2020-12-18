@@ -19,8 +19,8 @@ describe("<PokemonCard />", () => {
       HP: 40,
       Attack: 30,
       Defense: 50,
-      "Sp.Attack": 55,
-      "Sp.Defense": 55,
+      "Sp. Attack": 55,
+      "Sp. Defense": 55,
       Speed: 100,
     },
   };

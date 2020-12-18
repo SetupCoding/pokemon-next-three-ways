@@ -15,7 +15,7 @@ const getPokemon = async (_, query): Promise<Pokemon[]> => {
   return enhanceDataWithImages(data);
 };
 
-const Home = () => {
+const PokemonList = () => {
   const [query, setQuery] = useState<string>("");
   const [debouncedQuery, setDebouncedQuery] = useState<string>("");
   const [page, setPage] = useState(1);
@@ -76,4 +76,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default PokemonList;
