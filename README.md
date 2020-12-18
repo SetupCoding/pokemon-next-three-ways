@@ -44,7 +44,8 @@ Run `yarn test` for jest snapshot tests.
 ? Select the plugin module to execute: Hosting with Amplify Console
 ? Choose a type: Manual deployment
 ```
-4. Deploy app with `amplify publish`
+4. Run `yarn dev` so that the pokemon API is available and the app can be built
+5. Deploy app with `amplify publish`
 
 
 The URL for the app should be displayed in your terminal.
