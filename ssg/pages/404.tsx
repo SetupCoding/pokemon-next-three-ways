@@ -1,6 +1,7 @@
 import { Container, Row } from "react-bootstrap";
 
 import Link from "next/link";
+import React from "react";
 
 export const Custom404: React.FC = () => (
   <Container>
