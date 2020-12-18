@@ -38,7 +38,7 @@ const PokemonList = () => {
   return (
     <div className="container">
       <Head>
-        <title>Pokemon!</title>
+        <title>Pokemon! - CSR</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:title" content="Pokemon" key="title" />
