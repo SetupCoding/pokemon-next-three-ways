@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const data = await handleErrors(res);
   return {
     props: {
-      data: addImage(data, true),
+      data: addImage(data),
     },
   };
 };

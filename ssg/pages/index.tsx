@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const data = await handleErrors(res);
   return {
     props: {
-      data: enhanceDataWithImages(data, true),
+      data: enhanceDataWithImages(data),
     },
   };
 };
