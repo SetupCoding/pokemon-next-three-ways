@@ -20,10 +20,12 @@ Run `yarn test` for jest snapshot tests.
 
 ## Building
  1. Run `yarn install`
+     1. If building the SSG project run `yarn dev` so that the API is available
  2. Run `yarn build`
+     1. After completion, if starting the SSG project, kill the running dev instance
  3. Run `yarn start`
 
- ## Deploying
+ ## Deploying (SSG project only so far)
 1. Run `amplify configure`
 2. Run `amplify init`
 ```
